@@ -54,4 +54,13 @@ public class Stock {
                 ", magni=" + magni +
                 '}';
     }
+
+    //calling stock.reset() before creating a new IceCreamCar object.
+    public void reset() {
+        this.iceRockets = 0;
+        this.cones = 0;
+        this.balls = 0;
+        this.magni = 0;
+    }
 }
+

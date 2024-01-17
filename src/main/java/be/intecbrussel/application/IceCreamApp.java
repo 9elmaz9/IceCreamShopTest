@@ -20,6 +20,7 @@ public class IceCreamApp {
 
         PriceList priceList = new PriceList(1, 2, 4);
 
+        //
         Stock stock = new Stock();
         stock.setBalls(2);
         stock.setIceRockets(1);
@@ -32,11 +33,11 @@ public class IceCreamApp {
         Cone.Flavor[] balls2 = {
                 Cone.Flavor.STRAWBERRY,
                 Cone.Flavor.BANANA,
-                Cone.Flavor.STRACIATELLA,
+                Cone.Flavor.CHOCOLATE,
                 Cone.Flavor.VANILLA
         };
         Cone.Flavor[] balls3 = {
-                Cone.Flavor.VANILLA,
+                Cone.Flavor.PISTACHE,
                 Cone.Flavor.BANANA,
                 Cone.Flavor.BANANA,
                 Cone.Flavor.STRAWBERRY,
