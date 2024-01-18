@@ -4,6 +4,7 @@ import be.intecbrussel.eatables.Cone;
 import be.intecbrussel.eatables.IceRocket;
 import be.intecbrussel.eatables.Magnum;
 
+import java.util.Objects;
 import java.util.stream.Stream;
 
 public class IceCreamCar implements IceCReamSeller {
@@ -18,16 +19,19 @@ public class IceCreamCar implements IceCReamSeller {
 
     @Override
     public Cone orderCone(Cone.Flavor[] flavors) {
-        // OK -> guard close
-        flavors = Stream.of(flavors).filter(flavor -> flavor != null).toArray(Cone.Flavor[]::new);
+        // Guard close: handle null flavors
+        if (flavors == null) {
+            // Return an empty cone or handle it based on your application logic
+            return new Cone(new Cone.Flavor[0]);
+        }
 
-        //Write with guard close
+        // Guard close: filter out null flavors
+        flavors = Stream.of(flavors).filter(Objects::nonNull).toArray(Cone.Flavor[]::new);
+
+        // Write with guard close
         Cone preparedCone = prepareCone(flavors);
 
         if (preparedCone != null) {
-//            long countOrderBalls = Stream.of(flavors)
-//                    .filter(elem -> elem != null)
-//                    .count();
             long countOrderBalls = flavors.length;
             double priceCone = priceList.getBallPrice();
             this.profit += countOrderBalls * priceCone * 0.25;

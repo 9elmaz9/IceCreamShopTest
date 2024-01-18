@@ -23,7 +23,7 @@ public class IceCreamApp1 {
         Eatable[] eatables = new Eatable[3];
         int eatableIndex = 0;
 
-        while (isOrdering) {
+        while (true) {
             System.out.println("""
                     Which ice Cream do you want :
                     Press 1 for Cone Ice Cream
@@ -35,10 +35,10 @@ public class IceCreamApp1 {
             scanner.nextLine();
             switch (input) {
                 case 1:
-                    Cone.Flavor[] chosenFlavors = new Cone.Flavor[]{null, null, null, null, null};
+                    Cone.Flavor[] chosenFlavors = new Cone.Flavor[5];
                     int chosenFlavorsIndex = 0;
-                    boolean orderFlavour = true;
-                    while (orderFlavour) {
+
+                    while (chosenFlavorsIndex<5) {
                         System.out.println("You ordered Cone Ice Cream");
                         System.out.println("""
                                 Which flavor do you want :
@@ -54,105 +54,144 @@ public class IceCreamApp1 {
                         System.out.print("Enter your flavor: ");
                         String chooseFlavour = scanner.nextLine().toUpperCase();
                         if (!chooseFlavour.equals("EXIT")) {
-                            for (Cone.Flavor value : Cone.Flavor.values()) {
-                                if (value.toString().equals(chooseFlavour)) {
-                                    System.out.println("You choose " + value);
-                                    if (chosenFlavorsIndex >= chosenFlavors.length) {
-                                        System.out.println("You cannot add maximum bolls");
-                                        break;
-                                    } else {
-                                        chosenFlavors[chosenFlavorsIndex++] = value;
-                                        break;
-                                    }
-                                }
-                            }
-                        } else {
-                            orderFlavour = false;
+                            break;
+
                         }
-                        if (chosenFlavorsIndex == 5) {
-                            orderFlavour = false;
+                        Cone.Flavor flavor=Cone.Flavor.getFlavor(chooseFlavour);
+
+                        if (flavor != null) {
+                            System.out.println("You choose " + flavor);
+                            chosenFlavors[chosenFlavorsIndex++] = flavor;
+                        } else {
+                            System.out.println("Please choose a correct flavor");
                         }
                     }
+       //
+       //               for (Cone.Flavor value : Cone.Flavor.values()) {
+       //                   if (value.toString().equals(chooseFlavour)) {
+       //                       System.out.println("You choose " + value);
+       //                       if (chosenFlavorsIndex >= chosenFlavors.length) {
+       //                           System.out.println("You cannot add maximum bolls");
+       //                           break;
+       //                       } else {
+       //                           chosenFlavors[chosenFlavorsIndex++] = value;
+       //                           break;
+       //                       }
+       //                   }
+       //               }
+       //           } else {
+       //               orderFlavour = false;
+       //           }
+       //           if (chosenFlavorsIndex == 5) {
+       //               orderFlavour = false;
+       //           }
+       //       }
                     Cone finalOrderdCone = iceCreamSeller.orderCone(chosenFlavors);
-                    System.out.printf("Profit is : %.2f ", iceCreamSeller.getProfit());
-                    finalOrderdCone.eat();
-                    eatables[eatableIndex++] = finalOrderdCone;
+                    printAndEat(finalOrderdCone,iceCreamSeller,eatables,eatableIndex);
                     break;
+             //    System.out.printf("Profit is : %.2f ", iceCreamSeller.getProfit());
+             //    finalOrderdCone.eat();
+             //    eatables[eatableIndex++] = finalOrderdCone;
+             //    break;
                 case 2:
                     boolean iceRocketOrder = true;
                     while (iceRocketOrder) {
                         System.out.println("You choose Ice Rocket");
                         IceRocket iceRocket = iceCreamSeller.orderIceRocket();
-                        System.out.printf("Profit is : %.2f ", iceCreamSeller.getProfit());
-                        iceRocket.eat();
-                        eatables[eatableIndex++] = iceRocket;
-                        System.out.println("Do you what to another Ice Rocket ? YES or NO");
+                        printAndEat(iceRocket,iceCreamSeller,eatables,eatableIndex);
+
+                        System.out.println("Do you want another Ice Rocket? YES or NO");
                         String choose = scanner.nextLine().toUpperCase();
+
                         if (choose.equals("NO")) {
                             iceRocketOrder = false;
                         }
                     }
+
+                //    System.out.printf("Profit is : %.2f ", iceCreamSeller.getProfit());
+                //    iceRocket.eat();
+                //    eatables[eatableIndex++] = iceRocket;
+                //    System.out.println("Do you what to another Ice Rocket ? YES or NO");
+                //    String choose = scanner.nextLine().toUpperCase();
+                //    if (choose.equals("NO")) {
+                //        iceRocketOrder = false;
+                //    }
+
                     break;
                 case 3:
                     boolean magnumOrder = true;
                     while (magnumOrder) {
-                        System.out.println("""
-                                Which flavor of Magnum do you want :
-                                    Milk Chocolate
-                                    White Chocolate
-                                    Black Chocolate
-                                    Alpine Nuts
-                                    Romantics Strawberries
-                                    Exit""");
+                        System.out.println("Which flavor of Magnum do you want (Type EXIT to finish): ");
+
                         System.out.println("Type Flavor without chocolate: ");
                         String magnumType = scanner.nextLine().toUpperCase();
-                        Magnum magnum = null;
-                        switch (magnumType) {
-                            case "EXIT":
-                                magnumOrder = false;
-                                break;
-                            case "MILK":
-                                magnum = iceCreamSeller.orderMagnum(Magnum.MagnumType.MILKCHOCOLATE);
-                                break;
-                            case "WHITE":
-                                magnum = iceCreamSeller.orderMagnum(Magnum.MagnumType.WHITECHOCOLATE);
-                                break;
-                            case "BLACK":
-                                magnum = iceCreamSeller.orderMagnum(Magnum.MagnumType.BLACKCHOCOLATE);
-                                break;
-                            case "ALPINE":
-                                magnum = iceCreamSeller.orderMagnum(Magnum.MagnumType.APLINENUTS);
-                                break;
-                            case "ROMANTICS":
-                                magnum = iceCreamSeller.orderMagnum(Magnum.MagnumType.ROMANTICSTRAWBERRIES);
-                                break;
-                            default: {
+                        if (magnumType.equals("EXIT")) {
+                            magnumOrder = false;
+                        } else {
+                            Magnum magnum = iceCreamSeller.orderMagnum(Magnum.MagnumType.getMagnumType(magnumType));
+
+                            if (magnum != null) {
+                                printAndEat(magnum, iceCreamSeller, eatables, eatableIndex);
+                            } else {
                                 System.out.println("Please choose a correct flavor");
-                                continue;
                             }
                         }
-
-                        if (!magnumOrder) {
-                            break;
-                        }
-                        eatables[eatableIndex++] = magnum;
-                        magnum.eat(); // null pointer exception
                     }
+
+                 //   Magnum magnum = null;
+                 //   switch (magnumType) {
+                 //       case "EXIT":
+                 //           magnumOrder = false;
+                 //           break;
+                 //       case "MILK":
+                 //           magnum = iceCreamSeller.orderMagnum(Magnum.MagnumType.MILKCHOCOLATE);
+                 //           break;
+                 //       case "WHITE":
+                 //           magnum = iceCreamSeller.orderMagnum(Magnum.MagnumType.WHITECHOCOLATE);
+                 //           break;
+                 //       case "BLACK":
+                 //           magnum = iceCreamSeller.orderMagnum(Magnum.MagnumType.BLACKCHOCOLATE);
+                 //           break;
+                 //       case "ALPINE":
+                 //           magnum = iceCreamSeller.orderMagnum(Magnum.MagnumType.APLINENUTS);
+                 //           break;
+                 //       case "ROMANTICS":
+                 //           magnum = iceCreamSeller.orderMagnum(Magnum.MagnumType.ROMANTICSTRAWBERRIES);
+                 //           break;
+                 //       default: {
+                 //           System.out.println("Please choose a correct flavor");
+                 //           continue;
+                 //       }
+                 //   }
+
+                  //   if (!magnumOrder) {
+                  //       break;
+                  //   }
+                  //   eatables[eatableIndex++] = magnum;
+                  //   magnum.eat(); // null pointer exception
+
                     break;
                 case 4:
                     System.out.print("Do you want another Ice Cream ? Yes or No");
                     String choose = scanner.nextLine().toUpperCase();
                     if (choose.equals("NO")) {
-                        isOrdering = false;
+                        return;
                     }
                     break;
                 default:
                     System.out.println("Please choose between 1 and 4");
             }
-            System.out.printf("Profit is : %.2f ", iceCreamSeller.getProfit());
+           // System.out.printf("Profit is : %.2f ", iceCreamSeller.getProfit());
         }
     }
 
-
+    private static void printAndEat(Eatable eatable, IceCreamSalon iceCreamSeller, Eatable[] eatables, int eatableIndex) {
+        if (eatable != null) {
+            eatable.eat();
+            eatables[eatableIndex++] = eatable;
+            System.out.printf("Profit is: %.2f%n", iceCreamSeller.getProfit());
+        }
+    }
 }
+
 

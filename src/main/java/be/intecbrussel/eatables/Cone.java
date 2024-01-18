@@ -16,6 +16,9 @@ public class Cone implements Eatable {
     }
 
 
+
+
+
     // all different types of balls,
     @Override
     public void eat() {
@@ -32,8 +35,16 @@ public class Cone implements Eatable {
         LEMON,
         STRACIATELLA,
         MOKKA,
-        PISTACHE
+        PISTACHE;
 
+        public static Flavor getFlavor(String input) {
+            for (Flavor flavor:values()) {
+                if(flavor.name().toLowerCase().contains(input.toLowerCase())){
+                   return flavor;
+                }
+            }
+            return null;
+        }
     }
 
     @Override

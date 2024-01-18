@@ -26,92 +26,113 @@ public class IceCreamSalonTest {
         iceCreamSalon = new IceCreamSalon(priceList);
     }
 
+    //for ordering a Cone with different flavors
     @ParameterizedTest
     @MethodSource("returnFlavours")
-    void shouldReturnEqualsWhenNoStockOrderCone(Cone.Flavor coneFlavour) {
+    void orderConeShouldReturnNotNullAndProfitZero(Cone.Flavor coneFlavour) {
 
-        // given
-
-        //when
+        //with a single flavor and ordering a cone
         Cone.Flavor[] flavors = {coneFlavour};
         Cone cone = iceCreamSalon.orderCone(flavors);
-        //then
+        //cone should not be null, and the profit should be zero
         assertNotNull(cone);
 
         assertEquals(0, iceCreamSalon.getProfit());
     }
 
-    @Test
-    void shouldReturnEqualsWhenPriceListIceCreamSalonAndProfit() {
-        //given
-        PriceList priceListProfit = new PriceList(1, 2, 4);
-        assertNotNull(priceListProfit);
-        IceCreamSalon iceCreamSalonProfit = new IceCreamSalon(priceListProfit);
-        assertNotNull(iceCreamSalonProfit);
 
-        //when
+    //ordering a magnum and updating profit
+    @Test
+    void orderMagnumShouldReturnNotNullAndUpdateProfit() {
+        //non zero prises
+        PriceList priceListProfit = new PriceList(1, 2, 4);
+        IceCreamSalon iceCreamSalonProfit = new IceCreamSalon(priceListProfit);
+        //assertNotNull(iceCreamSalonProfit);
+
         Magnum magnum = iceCreamSalonProfit.orderMagnum(Magnum.MagnumType.APLINENUTS);
+
         assertNotNull(magnum);
-        double profit = iceCreamSalonProfit.getProfit();
+        // double profit = iceCreamSalonProfit.getProfit();
         //then
-        assertEquals(0.06, profit);
+        assertEquals(0.06, iceCreamSalonProfit.getProfit());
     }
 
 
+    // ordering IceRocket,return à when prise is 0
     @Test
-    void shouldReturnTrueWhenPriceListZeroAndOrderIceRocket() {
-        // given
+    void orderIceRocketShouldReturnNull() {
 
-        // when
         IceRocket iceRocket = iceCreamSalon.orderIceRocket();
-        // then
+        //  should be = 0
         assertNull(iceRocket);
     }
 
+
+    //?
+
     @Test
-    void shouldReturnNotNullWhenPriceListIceCreamSalonAndOrderMagnum() {
+    void magnumOrderShouldNotReturnNullWithPriceList(){
         //given
         PriceList priceListProfit = new PriceList(1, 2, 4);
-        assertNotNull(priceListProfit);
+       // assertNotNull(priceListProfit);
         IceCreamSalon iceCreamSalonProfit = new IceCreamSalon(priceListProfit);
-        assertNotNull(iceCreamSalonProfit);
+        //assertNotNull(iceCreamSalonProfit);
 
         //when
         Magnum magnum = iceCreamSalonProfit.orderMagnum(Magnum.MagnumType.APLINENUTS);
+
         assertNotNull(magnum);
 
 
     }
 
-    static Stream<Cone.Flavor> returnFlavours() {
-        return Stream.of(
-                Cone.Flavor.BANANA, Cone.Flavor.LEMON);
-    }
+ //  //?
+ //   static Stream<Cone.Flavor> returnFlavours() {
+ //      return Stream.of(
+ //              Cone.Flavor.BANANA, Cone.Flavor.LEMON);
+ //  }
 
+
+    //check profit calc after ordering an IceRocket
     @Test
-    void souldReturnEqualsWhengetProfit() {
+    void getProfitShouldReturnZero() {
 
-        //given
+        //non zero prices
         PriceList priceListProfit = new PriceList(1, 2, 4);
         IceCreamSalon iceCreamSalonProfit = new IceCreamSalon(priceListProfit);
+
+
         IceRocket iceRocket = iceCreamSalonProfit.orderIceRocket();
 
-        //when
 
-        //then
+        // should be updated correctly
         assertEquals(0.4, iceCreamSalonProfit.getProfit());
     }
 
+
+    //check the toString()
     @Test
-    void shouldReturnEqualWhenToString() {
+    void toStringShouldReturnExpectedString() {
 
-        //given
+        //getting the string representation of the IceCreamSalon
 
-        //when
-        String string = iceCreamSalon.toString();
-        //then
-        assertEquals("IceCreamSalon{priceList=PriceList{ballPrice=0.0, " +
-                "rocketPrice=0.0, magnumStandardPrice=0.0}, totalProfit=0.0}", string);
+        String expectedString = "IceCreamSalon{priceList=PriceList{ballPrice=0.0, " +
+                "rocketPrice=0.0, magnumStandardPrice=0.0}, totalProfit=0.0}";
+        // String string = iceCreamSalon.toString();
+
+        //assertion ,  the to string result should be match the expected string
+
+        // assertEquals("IceCreamSalon{priceList=PriceList{ballPrice=0.0, " +
+        //         "rocketPrice=0.0, magnumStandardPrice=0.0}, totalProfit=0.0}", string);
+
+        assertEquals(expectedString, iceCreamSalon.toString());
+    }
+
+    //helper method providing different Cone flavors for parameterized tests
+      static Stream<Cone.Flavor> returnFlavours() {
+        return Stream.of(Cone.Flavor.BANANA, Cone.Flavor.LEMON);
     }
 
 }
+
+

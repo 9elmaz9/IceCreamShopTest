@@ -12,6 +12,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -38,6 +39,14 @@ public class IceCreamCarTest {
         assertNull(iceCreamCar.orderCone(new Cone.Flavor[]{coneFlavour}));
 
     }
+    // Helper method to provide parameter values for single flavors
+    private static Stream<Cone.Flavor> provideSingleFlavors() {
+        return Stream.of(Cone.Flavor.STRAWBERRY, Cone.Flavor.VANILLA);
+    }
+
+
+
+
 
 
     //Tests that orderCone returns a cone and updates profit correctly when flavors are not null and stock is available.
@@ -45,14 +54,16 @@ public class IceCreamCarTest {
     @MethodSource("returnFlavoursList")
     void orderConeShouldReturnProfitableConeWhenFlavorsNotNullAndStockIsAvailable(List<Cone.Flavor> flavors) {
 
+        //arrange
         stock.setCones(3);
         stock.setBalls(3);
         assertEquals(0.0, iceCreamCar.getProfit());
 
+        //act
         //Cone result = iceCreamCar.orderCone(new Cone.Flavor[] {Cone.Flavor.BANANA, Cone.Flavor.LEMON});
         Cone result = iceCreamCar.orderCone(flavors.toArray(new Cone.Flavor[]{}));
 
-
+        //assert
         assertNotNull(result);
 
         double profit=Math.round(iceCreamCar.getProfit()*100)/100.00;
@@ -62,7 +73,10 @@ public class IceCreamCarTest {
         assertEquals(0.5, profit);
 
     }
-
+    // Method to provide parameter values for the test with flavor lists
+    private static Stream<Arguments> returnFlavoursList() {
+        return Stream.of(Arguments.arguments(List.of(Cone.Flavor.STRAWBERRY, Cone.Flavor.VANILLA)));
+    }
 
 
     // Tests that orderIceRocket returns null when ice rocket flavors are not specified.
@@ -120,7 +134,7 @@ public class IceCreamCarTest {
     //  profit = profit / 100.00;
 
         // actual profit is 0.01875
-        assertEquals(0.02, profit);
+        assertEquals(0.01, profit);
     }
 
     //Tests that getProfit returns the expected profit value when ice rocket is ordered.

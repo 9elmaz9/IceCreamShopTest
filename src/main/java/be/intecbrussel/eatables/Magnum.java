@@ -28,6 +28,26 @@ public class Magnum  implements Eatable{
         APLINENUTS,
         ROMANTICSTRAWBERRIES;
 
+
+
+        //method to get MagnumType by flavor
+        public static MagnumType getMagnumType(String flavor) {
+            switch (flavor.toUpperCase()) {
+                case "MILK":
+                    return MILKCHOCOLATE;
+                case "WHITE":
+                    return WHITECHOCOLATE;
+                case "BLACK":
+                    return BLACKCHOCOLATE;
+                case "ALPINE":
+                    return APLINENUTS;
+                case "ROMANTIC":
+                    return ROMANTICSTRAWBERRIES;
+                default:
+                    return null;
+            }
+        }
+
         @Override
         public String toString() {
             return "MagnumType " + super.toString();
