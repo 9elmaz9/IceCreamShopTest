@@ -21,8 +21,7 @@ public class IceCreamSalon  implements IceCReamSeller{
     }
 
 
-    // -orderCone will create and return a new cone based on an array of flavors.
-    // will also increase the total profit value based on the price list.(price * 0.25)
+    // +(price * 0.25)
     @Override
     public Cone orderCone(Cone.Flavor[] flavors){
 
@@ -39,8 +38,7 @@ public class IceCreamSalon  implements IceCReamSeller{
 
     }
 
-    // orderIceRocket will create and return a new iceRocket.
-    // will also increase the total profit value based on the price list.(price * 0.20)
+    //  create and return a new iceRocket.
     @Override
     public IceRocket orderIceRocket(){
 
@@ -55,8 +53,7 @@ public class IceCreamSalon  implements IceCReamSeller{
         }
     }
 
-    // orderMagnum will create and return a new Magnum based on a MagnumType.
-    // will also increase the total profit value based on the price list.(price * 0.01)
+    //  return a new Magnum  from MagnumType.
     @Override
     public Magnum orderMagnum(Magnum.MagnumType magnumType) {
 
