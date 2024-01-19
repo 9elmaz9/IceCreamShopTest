@@ -19,16 +19,16 @@ public class IceCreamCar implements IceCReamSeller {
 
     @Override
     public Cone orderCone(Cone.Flavor[] flavors) {
-        // Guard close: handle null flavors
+        //handle null flavors
         if (flavors == null) {
             // Return an empty cone or handle it based on your application logic
             return new Cone(new Cone.Flavor[0]);
         }
 
-        // Guard close: filter out null flavors
+        //filter out null flavors
         flavors = Stream.of(flavors).filter(Objects::nonNull).toArray(Cone.Flavor[]::new);
 
-        // Write with guard close
+
         Cone preparedCone = prepareCone(flavors);
 
         if (preparedCone != null) {
@@ -41,7 +41,7 @@ public class IceCreamCar implements IceCReamSeller {
         }
     }
 
-    // get the profit from the IceCream
+    // get the profit from the Ice Cream
     private Cone prepareCone(Cone.Flavor[] flavors) {
 
         Cone iceCone;
