@@ -34,7 +34,6 @@ public class IceCreamSalonTest {
         //with a single flavor and ordering a cone
         Cone.Flavor[] flavors = {coneFlavour};
         Cone cone = iceCreamSalon.orderCone(flavors);
-        //cone should not be null, and the profit should be zero
         assertNotNull(cone);
 
         assertEquals(0, iceCreamSalon.getProfit());
@@ -47,12 +46,10 @@ public class IceCreamSalonTest {
         //non zero prises
         PriceList priceListProfit = new PriceList(1, 2, 4);
         IceCreamSalon iceCreamSalonProfit = new IceCreamSalon(priceListProfit);
-        //assertNotNull(iceCreamSalonProfit);
 
         Magnum magnum = iceCreamSalonProfit.orderMagnum(Magnum.MagnumType.APLINENUTS);
 
         assertNotNull(magnum);
-        // double profit = iceCreamSalonProfit.getProfit();
         //then
         assertEquals(0.06, iceCreamSalonProfit.getProfit());
     }
@@ -68,8 +65,8 @@ public class IceCreamSalonTest {
     }
 
 
-    //?
 
+    //should not return 0
     @Test
     void magnumOrderShouldNotReturnNullWithPriceList(){
         //given
@@ -83,16 +80,9 @@ public class IceCreamSalonTest {
 
         assertNotNull(magnum);
 
-
     }
 
- //  //?
- //   static Stream<Cone.Flavor> returnFlavours() {
- //      return Stream.of(
- //              Cone.Flavor.BANANA, Cone.Flavor.LEMON);
- //  }
-
-
+    
     //check profit calc after ordering an IceRocket
     @Test
     void getProfitShouldReturnZero() {
@@ -101,9 +91,7 @@ public class IceCreamSalonTest {
         PriceList priceListProfit = new PriceList(1, 2, 4);
         IceCreamSalon iceCreamSalonProfit = new IceCreamSalon(priceListProfit);
 
-
         IceRocket iceRocket = iceCreamSalonProfit.orderIceRocket();
-
 
         // should be updated correctly
         assertEquals(0.4, iceCreamSalonProfit.getProfit());
@@ -118,12 +106,8 @@ public class IceCreamSalonTest {
 
         String expectedString = "IceCreamSalon{priceList=PriceList{ballPrice=0.0, " +
                 "rocketPrice=0.0, magnumStandardPrice=0.0}, totalProfit=0.0}";
-        // String string = iceCreamSalon.toString();
 
         //assertion ,  the to string result should be match the expected string
-
-        // assertEquals("IceCreamSalon{priceList=PriceList{ballPrice=0.0, " +
-        //         "rocketPrice=0.0, magnumStandardPrice=0.0}, totalProfit=0.0}", string);
 
         assertEquals(expectedString, iceCreamSalon.toString());
     }
