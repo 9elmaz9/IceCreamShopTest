@@ -44,11 +44,6 @@ public class IceCreamCarTest {
         return Stream.of(Cone.Flavor.STRAWBERRY, Cone.Flavor.VANILLA);
     }
 
-
-
-
-
-
     //Tests that orderCone returns a cone and updates profit correctly when flavors are not null and stock is available.
     @ParameterizedTest
     @MethodSource("returnFlavoursList")
@@ -67,9 +62,7 @@ public class IceCreamCarTest {
         assertNotNull(result);
 
         double profit=Math.round(iceCreamCar.getProfit()*100)/100.00;
-    // double profit = iceCreamCar.getProfit();
-    // profit = Math.round(profit * 100);
-    // profit = profit / 100.00;
+    
         assertEquals(0.5, profit);
 
     }
@@ -98,9 +91,7 @@ public class IceCreamCarTest {
         assertNotNull(result);
 
         double profit=Math.round(iceCreamCar.getProfit()*100)/100.00;
-    //  double profit = iceCreamCar.getProfit();
-    //  profit = Math.round(profit * 100);
-    //  profit = profit / 100.00;
+   
         assertEquals(0.4, profit);
     }
 
@@ -129,9 +120,6 @@ public class IceCreamCarTest {
         assertNotNull(magnum);
 
         double profit=Math.round(iceCreamCar.getProfit()*100)/100.00;
-    //  double profit = iceCreamCar.getProfit();
-    //  profit = Math.round(profit * 100);
-    //  profit = profit / 100.00;
 
         // actual profit is 0.01875
         assertEquals(0.01, profit);
@@ -148,10 +136,7 @@ public class IceCreamCarTest {
 
 
         double profit=Math.round(iceCreamCar.getProfit()*100)/100.00;
-     // double profit = iceCreamCar.getProfit();
-     // profit = Math.round(profit * 100);
-     // profit = profit / 100.00;
-
+    
         assertEquals(0.4, profit);
     }
 
