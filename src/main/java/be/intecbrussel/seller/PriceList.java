@@ -33,9 +33,8 @@ public class PriceList {
         this.rocketPrice = rocketPrice;
     }
 
-    // will return, based on a given MagnumType and a generally specified magnumStandardPrice,
-    // what the price of such a magnum will be. Eg:
-    // An alpine nuts magnum will be 1.5 times the price of a standard magnum
+
+    //An Alpine nuts magnum will be 1.5 times more expensive than a standard magnum.
     public double getMagnumPrice(Magnum.MagnumType magnumType) {
 
         double totalPrice = 0;
@@ -49,9 +48,9 @@ public class PriceList {
         return totalPrice;
     }
 
-    // generally specified magnumStandardPrice,
-    // what the price of such a magnum will be. Eg:
-    // An alpinenuts magnum will be 1.5 times the price of a standard magnum
+
+ 
+    //An Alpine nuts magnum will be 1.5 times more expensive than a standard magnum.
     public void setMagnumStandardPrice(double magnumStandardPrice) {
         this.magnumStandardPrice = magnumStandardPrice;
     }
