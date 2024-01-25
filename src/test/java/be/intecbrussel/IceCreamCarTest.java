@@ -32,7 +32,7 @@ public class IceCreamCarTest {
                 stock);
     }
 
-    @ParameterizedTest // returt null when snock is empty
+    @ParameterizedTest // returt null when stock is empty
     @MethodSource("provideSingleFlavors")
     void orderConeShouldReturnNullWhenCurrentStockIsEmpty(Cone.Flavor coneFlavour) {
 
